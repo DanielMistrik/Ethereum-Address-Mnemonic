@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p> This is a Test</p>
+<form action = "" method = "post">
+    {% csrf_token %}
+    <label for="ethAddress">Ethereum Address:</label>
+    <input type="text" id="ethAddress" name="ethAddress"><br><br>
+    <input type="submit" value="Submit">
+</form>
+{% if eth_Address %}
+<p>Ethereum Address:<a>{{eth_Address}}</a></p>
+{% endif %}
+</body>
+</html>
