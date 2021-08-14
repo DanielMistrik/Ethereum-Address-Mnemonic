@@ -5,15 +5,33 @@
     <title>Title</title>
 </head>
 <body>
-<p> This is a Test</p>
-<form action = "" method = "post">
+<a href="{% url 'index' %}">Main</a>
+<a href="{% url 'about' %}">About</a>
+<a href="{% url 'share' %}">Share</a>
+<p> Ethereum Mnemonic Generator</p>
+<form name="EthIn" action = "" method = "post">
     {% csrf_token %}
     <label for="ethAddress">Ethereum Address:</label>
-    <input type="text" id="ethAddress" name="ethAddress"><br><br>
+    <input type="text" oninput="myFunction()" id="ethAddress" name="ethAddress" required>
+    <a id = "isValid"></a>
+    <br><br>
     <input type="submit" value="Submit">
 </form>
 {% if eth_Address %}
-<p>Ethereum Address:<a>{{eth_Address}}</a></p>
+<p>Ethereum Mnemonic:  <a>{{eth_Address}}</a></p>
+{% endif %}
+{% load static %}
+<script src="{% static 'bundle.js' %}"></script>
+<script src="{% static 'isValidEthAddress.js' %}"></script>
+<form name="EthOut" action = "" method = "post">
+    {% csrf_token %}
+    <label for="ethAddress">Ethereum Address:</label>
+    <input type="text" id="mnemonic" name="mnemonic" required>
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
+{% if eth_mnemonic %}
+<p>Ethereum Mnemonic:  <a>{{eth_mnemonic}}</a></p>
 {% endif %}
 </body>
 </html>
