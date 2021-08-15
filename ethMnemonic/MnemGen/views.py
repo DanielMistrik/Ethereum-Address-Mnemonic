@@ -67,9 +67,28 @@ def about(request):
 def share(request):
     return render(request,'MnemGen/share.html')
 
-#min_id = WordListEntry.objects.all().order_by('id').first().id
-#entry = WordListEntry.objects.get(pk=min_id)
-#context = {'entry':entry,}
-#output = "/".join(str(w.pk) for w in entry)
-#return render(request,'MnemGen/index.html',context)
-#HttpResponse(output)
+def EthtoMnem(request):
+    if request.is_ajax():
+        first_name = request.POST.get('first_name', None) # getting data from first_name input
+        try:
+            returnVar = encrypt(first_name)
+        except ValueError:
+            returnVar = "Error"
+        if first_name: #cheking if first_name and last_name have value
+            response = {
+                         'msg':returnVar
+            }
+            return JsonResponse(response) # return response as JSON
+
+def MnemtoEth(request):
+    if request.is_ajax():
+        mnemonic = request.POST.get('mnem', None) # getting data from first_name input
+        try:
+            returnVar = decrypt(mnemonic)
+        except ValueError:
+            returnVar = "Error"
+        if mnemonic:
+            response = {
+                         'msg':returnVar
+            }
+            return JsonResponse(response)

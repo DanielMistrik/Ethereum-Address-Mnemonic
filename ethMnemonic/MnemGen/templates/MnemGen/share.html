@@ -9,5 +9,10 @@
 <a href="{% url 'about' %}">About</a>
 <a href="{% url 'share' %}">Share</a>
 <p>A final share page with twitter and facebook sharing, just share the link to index</p>
+{% load social_share %}
+{% post_to_facebook object_or_url "Post to Facebook!" %}
+{% post_to_whatsapp object_or_url "Share via WhatsApp" %}
+{% post_to_twitter object_or_url "Post to Twitter!"%}
+
 </body>
 </html>
