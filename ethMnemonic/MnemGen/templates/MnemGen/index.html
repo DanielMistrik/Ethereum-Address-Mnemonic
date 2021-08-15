@@ -19,14 +19,19 @@
          <input  type="submit" name="submit" value="submit">
     </form>
 <a>Ethereum Address:  </a>
-    <a id="MnemonicOutput">
+    <a id="MnemonicOutput" >
     </a>
+<button id = "copyAddressButton" onclick="copyAddress()">Copy</button>
 {% load static %}
 <script src="{% static 'bundle.js' %}"></script>
 <script src="{% static 'isValidEthAddress.js' %}"></script>
 <script>
     var post_link_1 = "{% url 'Eth_to_Mnem' %}";
     var csrf_token_1 = '{{ csrf_token }}';
+function copyAddress(){
+    let text = document.getElementById('MnemonicOutput').textContent;
+    navigator.clipboard.writeText(text);
+}
 </script>
 <script src="{% static 'EthAddressToMnemonic.js' %}"></script>
 
@@ -40,9 +45,14 @@
 <a>Mnemonic:  </a>
     <a id="AddressOutput">
     </a>
+<button onclick="copyMnemonic()">Copy</button>
 <script>
     var post_link_2 = "{% url 'Mnem_to_Eth' %}";
     var csrf_token_2 = '{{ csrf_token }}';
+    function copyMnemonic(){
+        let text = document.getElementById('AddressOutput').textContent;
+        navigator.clipboard.writeText(text);
+    }
 </script>
 <script src="{% static 'MnemonicToEthAddress.js' %}"></script>
 </body>

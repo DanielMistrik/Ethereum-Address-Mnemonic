@@ -8,7 +8,9 @@
 <a href="{% url 'index' %}">Main</a>
 <a href="{% url 'about' %}">About</a>
 <a href="{% url 'share' %}">Share</a>
-<p>A final share page with twitter and facebook sharing, just share the link to index</p>
+<h1>Share</h1>
+<p>If you like what you see please consider sharing this website with your friends and family so more people know
+about this project!</p>
 {% load social_share %}
 {% post_to_facebook object_or_url "Post to Facebook!" %}
 {% post_to_whatsapp object_or_url "Share via WhatsApp" %}

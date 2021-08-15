@@ -9,7 +9,7 @@ $.ajax({
         dataType: "json",
     },
     success: function(data){
-        $('#AddressOutput').html(data.msg) /* response message */
+        $('#AddressOutput').value =data.msg;/* response message */
     },
     failure: function() {
     }

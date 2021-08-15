@@ -1,5 +1,4 @@
 $('#EthIn').on('submit', function(e){
-    console.log("Here");
 e.preventDefault();
 $.ajax({
     type : "POST",
@@ -10,9 +9,10 @@ $.ajax({
         dataType: "json",
     },
     success: function(data){
-        $('#MnemonicOutput').html(data.msg) /* response message */
+        $('#MnemonicOutput').value = data.msg;
     },
     failure: function() {
     }
         });
+
 });

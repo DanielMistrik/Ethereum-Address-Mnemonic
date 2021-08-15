@@ -8,6 +8,24 @@
 <a href="{% url 'index' %}">Main</a>
 <a href="{% url 'about' %}">About</a>
 <a href="{% url 'share' %}">Share</a>
-<p>The About Page. Explain the point of the website</p>
+<h1>About</h1>
+<p>Author: Daniel Mistrik</p>
+<p>This project was inspired by the complexity of Ethereum addresses. The 42-character long hexadecimal is a combination
+    of seemingly random numbers and letter making them incredibly difficult to transfer through word of mouth.
+    Misspelling or forgetting a single character can mean a non-reversible loss of ether. While improvements,
+    such as <a href="https://ens.domains/">ENS</a> have improved memorability and error-checking they are not
+    automatic to every address and often require payment to work. In short, the standard Ethereum address system is,
+    for cryptographic reasons, a large and complicated one that is not intuitive and difficult to use and share
+    in-person.</p>
+<p>Inspired by <a href="https://what3words.com/">what3words</a> which turned the similarly complicated system of coordinates
+    and location on Earth into three simple words this project converts every ethereum address into a unique mnemonic.
+    Every ethereum address is assigned a unique 14-word mnemonic that one can share and use for error-checking. The
+    mnemonic is composed of non-similar words so a change of even one character in the address should make a noticeably
+    different mnemonic.The mnemonic is unique to every address is permanent.  One might ask why this mnemonic is 14 words
+    and what3words just 3! The simple answer is that for security reasons the number of possible ethereum addresses is
+    far greater than the number of places on Earth so this mnemonic needs to be larger. </p>
+<p>The website supports <a href="https://medium.com/exodus-movement/eip55-why-its-important-what-is-this-
+and-why-am-i-talking-about-it-now-ac9254f43bb6">EIP-55</a> and is case sensitive.</p>
+
 </body>
 </html>
