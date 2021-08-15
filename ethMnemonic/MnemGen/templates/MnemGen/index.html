@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}">
 </head>
 <body>
-<a href="{% url 'index' %}">Main</a>
-<a href="{% url 'about' %}">About</a>
-<a href="{% url 'share' %}">Share</a>
+<div class="header">
+  <div class="header-logo">CompanyLogo</div>
+  <div class="header-right">
+    <a class = "active" href="{% url 'index' %}">Main</a>
+    <a href="{% url 'about' %}">About</a>
+    <a href="{% url 'share' %}">Share</a>
+  </div>
+</div>
+<div class="text">
 <p> Ethereum Mnemonic Generator</p>
 <form id="EthIn" method="POST">
         <label for="ethAddress">Ethereum Address:</label>
@@ -19,23 +26,10 @@
          <input  type="submit" name="submit" value="submit">
     </form>
 <a>Ethereum Address:  </a>
-    <a id="MnemonicOutput" >
+    <a class = "active" id="MnemonicOutput" >
     </a>
-<button id = "copyAddressButton" onclick="copyAddress()">Copy</button>
-{% load static %}
-<script src="{% static 'bundle.js' %}"></script>
-<script src="{% static 'isValidEthAddress.js' %}"></script>
-<script>
-    var post_link_1 = "{% url 'Eth_to_Mnem' %}";
-    var csrf_token_1 = '{{ csrf_token }}';
-function copyAddress(){
-    let text = document.getElementById('MnemonicOutput').textContent;
-    navigator.clipboard.writeText(text);
-}
-</script>
-<script src="{% static 'EthAddressToMnemonic.js' %}"></script>
-
-<form id="EthOut" method="POST">
+<button id = "copyAddressButton" onclick="copyAddress()" style="visibility : hidden;">Copy</button>
+    <form id="EthOut" method="POST">
         <label for="mnemonic">Ethereum Mnemonic:</label>
         <input id="mnemonic" type="text" name="mnemonic" required>
     <br>
@@ -43,10 +37,16 @@ function copyAddress(){
          <input  type="submit" name="submit" value="submit">
     </form>
 <a>Mnemonic:  </a>
-    <a id="AddressOutput">
+    <a class = "active" id="AddressOutput">
     </a>
-<button onclick="copyMnemonic()">Copy</button>
+<button id = "copyMnemButton" onclick="copyMnemonic()" style="visibility : hidden;">Copy</button>
 <script>
+    var post_link_1 = "{% url 'Eth_to_Mnem' %}";
+    var csrf_token_1 = '{{ csrf_token }}';
+function copyAddress(){
+    let text = document.getElementById('MnemonicOutput').textContent;
+    navigator.clipboard.writeText(text);
+}
     var post_link_2 = "{% url 'Mnem_to_Eth' %}";
     var csrf_token_2 = '{{ csrf_token }}';
     function copyMnemonic(){
@@ -54,6 +54,11 @@ function copyAddress(){
         navigator.clipboard.writeText(text);
     }
 </script>
-<script src="{% static 'MnemonicToEthAddress.js' %}"></script>
+</div>
 </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'bundle.js' %}"></script>
+<script src="{% static 'isValidEthAddress.js' %}"></script>
+<script src="{% static 'MnemonicToEthAddress.js' %}"></script>
+<script src="{% static 'EthAddressToMnemonic.js' %}"></script>

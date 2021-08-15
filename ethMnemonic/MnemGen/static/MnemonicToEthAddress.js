@@ -9,7 +9,9 @@ $.ajax({
         dataType: "json",
     },
     success: function(data){
-        $('#AddressOutput').value =data.msg;/* response message */
+        document.getElementById("copyMnemButton").style.visibility = 'visible';
+        document.getElementById("AddressOutput").textContent = data.msg;
+        document.getElementById("AddressOutput").style = "font-size: 20px;";
     },
     failure: function() {
     }

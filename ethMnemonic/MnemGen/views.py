@@ -69,12 +69,12 @@ def share(request):
 
 def EthtoMnem(request):
     if request.is_ajax():
-        first_name = request.POST.get('first_name', None) # getting data from first_name input
+        addrss = request.POST.get('addrss', None)
         try:
-            returnVar = encrypt(first_name)
+            returnVar = encrypt(addrss)
         except ValueError:
             returnVar = "Error"
-        if first_name: #cheking if first_name and last_name have value
+        if addrss: #cheking if first_name and last_name have value
             response = {
                          'msg':returnVar
             }

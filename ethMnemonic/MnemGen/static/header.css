@@ -1,0 +1,70 @@
+body {
+  margin:0px;
+  font-family: Arial;
+}
+
+.header {
+  overflow: hidden;
+  background-color: #052663;
+  padding: 10px 10px;
+}
+
+.header a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-decoration: none;
+  font-size: 20px;
+  line-height: 25px;
+  font-weight: bold;
+}
+
+.header-logo {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  padding-right: 20px;
+  line-height: 25px;
+  border-radius: 4px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+
+.header-right {
+  float: right;
+}
+.header a.active {
+  color: #85b0ff;
+}
+.header a.popuptext {
+  font-size: 15px;
+  padding-right: 5px;
+  color:red;
+}
+
+.text {
+  padding-left: 12px;
+}
+
+@media screen and (max-width: 530px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+  .header-right {
+    float: none;
+    text-allign: left;
+  }
+
+  .header-logo {
+  padding-right: 200px;
+  padding-bottom: 20px;
+  }
+}

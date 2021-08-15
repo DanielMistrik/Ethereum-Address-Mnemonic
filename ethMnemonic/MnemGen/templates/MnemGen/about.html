@@ -3,11 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}">
 </head>
 <body>
+<div class="header">
+  <div class="header-logo">CompanyLogo</div>
+  <div class="header-right">
 <a href="{% url 'index' %}">Main</a>
-<a href="{% url 'about' %}">About</a>
+<a class="active" href="{% url 'about' %}">About</a>
 <a href="{% url 'share' %}">Share</a>
+  </div>
+</div>
+<div class="text">
 <h1>About</h1>
 <p>Author: Daniel Mistrik</p>
 <p>This project was inspired by the complexity of Ethereum addresses. The 42-character long hexadecimal is a combination
@@ -26,6 +34,6 @@
     far greater than the number of places on Earth so this mnemonic needs to be larger. </p>
 <p>The website supports <a href="https://medium.com/exodus-movement/eip55-why-its-important-what-is-this-
 and-why-am-i-talking-about-it-now-ac9254f43bb6">EIP-55</a> and is case sensitive.</p>
-
+</div>
 </body>
 </html>

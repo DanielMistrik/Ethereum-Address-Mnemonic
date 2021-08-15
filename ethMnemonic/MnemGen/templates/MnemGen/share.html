@@ -3,18 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}">
 </head>
 <body>
-<a href="{% url 'index' %}">Main</a>
-<a href="{% url 'about' %}">About</a>
-<a href="{% url 'share' %}">Share</a>
-<h1>Share</h1>
-<p>If you like what you see please consider sharing this website with your friends and family so more people know
+<div class="header">
+  <div class="header-logo">CompanyLogo</div>
+  <div class="header-right">
+    <a href="{% url 'index' %}">Main</a>
+    <a href="{% url 'about' %}">About</a>
+    <a class = "active" href="{% url 'share' %}">Share</a>
+  </div>
+</div>
+<h1 class="text">Share</h1>
+<p class="text">If you like what you see please consider sharing this website with your friends and family so more people know
 about this project!</p>
+<div class="text">
 {% load social_share %}
 {% post_to_facebook object_or_url "Post to Facebook!" %}
 {% post_to_whatsapp object_or_url "Share via WhatsApp" %}
 {% post_to_twitter object_or_url "Post to Twitter!"%}
-
+</div>
 </body>
 </html>
