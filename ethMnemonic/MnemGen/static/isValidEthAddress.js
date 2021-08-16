@@ -19,14 +19,5 @@ function isValid(addrss){
         }
     }
     return true;
-    }
-    function myFunction() {
-        var x = document.getElementById("ethAddress").value;
-        if (isValid(x)){
-        document.getElementById("isValid").innerHTML = "Valid";
-        }
-        else{
-        document.getElementById("isValid").innerHTML = "Invalid";
-        }
-      
-      }
+}
+

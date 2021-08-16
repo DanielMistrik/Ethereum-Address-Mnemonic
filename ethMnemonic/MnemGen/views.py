@@ -64,15 +64,13 @@ def index(request):
 
 def about(request):
     return render(request,'MnemGen/about.html')
-def share(request):
-    return render(request,'MnemGen/share.html')
 
 def EthtoMnem(request):
     if request.is_ajax():
         addrss = request.POST.get('addrss', None)
         try:
             returnVar = encrypt(addrss)
-        except ValueError:
+        except Exception:
             returnVar = "Error"
         if addrss: #cheking if first_name and last_name have value
             response = {
@@ -85,10 +83,30 @@ def MnemtoEth(request):
         mnemonic = request.POST.get('mnem', None) # getting data from first_name input
         try:
             returnVar = decrypt(mnemonic)
-        except ValueError:
+        except Exception:
             returnVar = "Error"
         if mnemonic:
             response = {
                          'msg':returnVar
             }
             return JsonResponse(response)
+
+def MnemChecker(request):
+    if request.is_ajax():
+        mnemonic = request.POST.get('mnem',None)
+        isValid = False
+        if not mnemonic is None:
+            words = mnemonic.split('-')
+            if len(words) == 14:
+                for i in range(14):
+                    try:
+                        WordListEntry.objects.get(word=words[i])
+                        if i==13:
+                            isValid = True
+                    except Exception:
+                        break;
+        response = {
+            'msg':"Valid" if isValid else "Invalid"
+        }
+        print(response)
+        return  JsonResponse(response)

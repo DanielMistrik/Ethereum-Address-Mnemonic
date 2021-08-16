@@ -6,14 +6,16 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}">
     <link rel="shortcut icon" type="image/jpg" href="{% static 'fixedlogoSmall.jpg' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <div class="header">
-    <img class = "logo" src="{% static 'fixedlogoSmall.jpg' %}" alt="My image">
+    <a href="{% url 'index' %}">
+        <img class = "logo" src="{% static 'fixedlogoSmall.jpg' %}" alt="My image">
+    </a>
   <div class="header-right">
 <a href="{% url 'index' %}">Main</a>
 <a class="active" href="{% url 'about' %}">About</a>
-<a href="{% url 'share' %}">Share</a>
   </div>
 </div>
 <div class="text">
@@ -36,7 +38,22 @@
     far greater than the number of coordinates on Earth so this mnemonic needs to be larger. </p>
 <p>This project supports <a href="https://medium.com/exodus-movement/eip55-why-its-important-what-is-this-
 and-why-am-i-talking-about-it-now-ac9254f43bb6">EIP-55</a> and is case sensitive.</p>
-        </div>
+    </div>
+</div>
+
+<div class="text" style="text-align: center; vertical-align: bottom;">
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+       style = "text-decoration: none;" target="blank">
+        <i class="fab fa-facebook-square" style="font-size: 48px; padding-right: 20px; color: #6891C3;"></i>
+    </a>
+    <a href="https://api.whatsapp.com/send?text={{ request.build_absolute_uri }}"
+       style = "text-decoration: none;" target="blank">
+        <i class="fab fa-whatsapp-square" style="font-size: 48px; padding-right: 20px; color: #6891C3;"></i>
+    </a>
+    <a href="https://twitter.com/intent/tweet?text={{ request.build_absolute_uri }}"
+       style = "text-decoration: none;" target="blank">
+        <i class="fab fa-twitter-square" style="font-size: 48px; padding-right: 20px; color: #6891C3;"></i>
+    </a>
 </div>
 </body>
 </html>

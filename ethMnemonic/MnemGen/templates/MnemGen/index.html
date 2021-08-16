@@ -6,50 +6,92 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}">
     <link rel="shortcut icon" type="image/jpg" href="{% static 'fixedlogoSmall.jpg' %}"/>
+    <link rel="shortcut icon" type="image/jpg" href="{% static 'bigLogo.jpg' %}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 <div class="header">
-  <img class = "logo" src="{% static 'fixedlogoSmall.jpg' %}" alt="My image">
+    <a href="{% url 'index' %}">
+        <img class = "logo" src="{% static 'fixedlogoSmall.jpg' %}" alt="My image">
+    </a>
   <div class="header-right">
     <a class = "active" href="{% url 'index' %}">Main</a>
     <a href="{% url 'about' %}">About</a>
-    <a href="{% url 'share' %}">Share</a>
   </div>
 </div>
 <div class="text">
-<p> Ethereum Mnemonic Generator</p>
+<img src="{% static 'bigLogo.jpg' %}" style = "width:100px; height: auto; display: block; margin-left: auto; margin-right: auto; padding: 20px;" alt="My image">
 <form id="EthIn" method="POST">
-        <label for="ethAddress">Ethereum Address:</label>
-        <input id="ethAddress" type="text" oninput="myFunction()" name="ethAddress" required>
-        <a id = "isValid"></a>
-    <br>
-    <br>
-         <input  type="submit" name="submit" value="submit">
+    <div style="position: relative; width:500px;  margin: auto;">
+        <input id="ethAddress" type="text" oninput="myFunction()" name="ethAddress" placeholder="Enter an Ethereum Address" required>
+        <div id="validicon" style="display: none;">
+        <i class="far fa-check-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
+        </div>
+        <div id="wrongicon" style="display: none;">
+        <i class="far fa-times-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
+        </div>
+        <input type="submit" name="submit" value="submit">
+        </div>
+
     </form>
 <a>Ethereum Address:  </a>
     <a class = "active" id="MnemonicOutput" >
     </a>
-<button id = "copyAddressButton" onclick="copyAddress()" style="visibility : hidden;">Copy</button>
+<button class="btn" id = "copyAddressButton" onclick="copyAddress()">
+    <i class="far fa-copy copyicon" style="font-size:24px;"></i>
+</button>
+    <script>
+        function myFunction() {
+        var x = document.getElementById("ethAddress").value;
+        document.getElementById("ethAddress").style.backgroundColor= "#FAF8F6";
+        if (isValid(x)){
+        //document.getElementById("isValid").innerHTML = "Valid";
+        document.getElementById("validicon").style.display = "block";
+        document.getElementById("wrongicon").style.display = "none";
+        }
+        else{
+        //document.getElementById("isValid").innerHTML = "Invalid";
+        document.getElementById("validicon").style.display = "none";
+        document.getElementById("wrongicon").style.display = "block";
+        }
+        }
+    </script>
     <form id="EthOut" method="POST">
-        <label for="mnemonic">Ethereum Mnemonic:</label>
-        <input id="mnemonic" type="text" name="mnemonic" required>
-    <br>
-    <br>
-         <input  type="submit" name="submit" value="submit">
+        <div style="position: relative; width:900px;">
+        <input id="mnemonic" type="text" oninput="hit()" name="mnemonic" placeholder="Enter a Mnemonic" required>
+        <div id="validicon2" style="display: none;">
+        <i class="far fa-check-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
+        </div>
+        <div id="wrongicon2" style="display: none;">
+        <i class="far fa-times-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
+        </div>
+            <input type="submit" name="submit" style="position: absolute; top: 0px; right: -55px; height:34px;" value="submit">
+        </div>
     </form>
 <a>Mnemonic:  </a>
     <a class = "active" id="AddressOutput">
     </a>
-<button id = "copyMnemButton" onclick="copyMnemonic()" style="visibility : hidden;">Copy</button>
+<button class="btn" id = "copyMnemButton" onclick="copyMnemonic()" >
+    <i class="far fa-copy copyicon" style="font-size:24px;"></i>
+</button>
+    <script>
+        function hit(){
+            isValidMnem();
+        }
+    </script>
 <script>
     var post_link_1 = "{% url 'Eth_to_Mnem' %}";
     var csrf_token_1 = '{{ csrf_token }}';
-function copyAddress(){
+    var post_link_2 = "{% url 'Mnem_to_Eth' %}";
+    var csrf_token_2 = '{{ csrf_token }}';
+    var post_link_3 = "{% url 'MnemValid' %}";
+    var csrf_token_3 = '{{ csrf_token }}';
+
+    function copyAddress(){
     let text = document.getElementById('MnemonicOutput').textContent;
     navigator.clipboard.writeText(text);
 }
-    var post_link_2 = "{% url 'Mnem_to_Eth' %}";
-    var csrf_token_2 = '{{ csrf_token }}';
+
     function copyMnemonic(){
         let text = document.getElementById('AddressOutput').textContent;
         navigator.clipboard.writeText(text);
@@ -63,3 +105,4 @@ function copyAddress(){
 <script src="{% static 'isValidEthAddress.js' %}"></script>
 <script src="{% static 'MnemonicToEthAddress.js' %}"></script>
 <script src="{% static 'EthAddressToMnemonic.js' %}"></script>
+<script src="{% static 'isValidMnemonic.js' %}"></script>
