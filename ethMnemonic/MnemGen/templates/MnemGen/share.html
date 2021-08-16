@@ -5,10 +5,11 @@
     <title>Title</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}">
+    <link rel="shortcut icon" type="image/jpg" href="{% static 'fixedlogoSmall.jpg' %}"/>
 </head>
 <body>
 <div class="header">
-  <div class="header-logo">CompanyLogo</div>
+  <img class = "logo" src="{% static 'fixedlogoSmall.jpg' %}" alt="My image">
   <div class="header-right">
     <a href="{% url 'index' %}">Main</a>
     <a href="{% url 'about' %}">About</a>
