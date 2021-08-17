@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>0xdWords</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}">
     <link rel="shortcut icon" type="image/jpg" href="{% static 'fixedlogoSmall.jpg' %}"/>
-    <link rel="shortcut icon" type="image/jpg" href="{% static 'bigLogo.jpg' %}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -19,10 +18,41 @@
     <a href="{% url 'about' %}">About</a>
   </div>
 </div>
-<div class="text">
-<img src="{% static 'bigLogo.jpg' %}" style = "width:100px; height: auto; display: block; margin-left: auto; margin-right: auto; padding: 20px;" alt="My image">
+<div style="position: relative;display: block;margin: auto; text-align: center; padding: 20px;">
+<a href="{% url 'about' %}">
+<img src="{% static 'bigLogo.jpg' %}" style = "width:100px; height: auto;">
+    </a>
+</div>
+    <br>
+<a id = "switchArea" style="display: block; text-align: center;">
+    <i id = "inAddr" class="fas fa-circle" style="font-size:14px; color: #6891C3;"></i>
+    <i id = "inMnem" class="far fa-circle" style="font-size:14px; color: #6891C3;"></i>
+</a>
+<br>
+<br>
+<script>
+    document.getElementById("switchArea").onclick =  function(){
+        if (document.getElementById('inAddr').classList.contains('fas')){
+            document.getElementById('inAddr').classList.remove('fas');
+            document.getElementById('inAddr').classList.add('far');
+            document.getElementById('inMnem').classList.remove('far');
+            document.getElementById('inMnem').classList.add('fas');
+            document.getElementById('addressForm').style.display = 'none';
+            document.getElementById('mnemForm').style.display='block';
+        }
+        else{
+            document.getElementById('inAddr').classList.remove('far');
+            document.getElementById('inAddr').classList.add('fas');
+            document.getElementById('inMnem').classList.remove('fas');
+            document.getElementById('inMnem').classList.add('far');
+            document.getElementById('addressForm').style.display = 'block';
+            document.getElementById('mnemForm').style.display='none';
+        }
+    }
+</script>
+<div id="addressForm" style="display: block;">
 <form id="EthIn" method="POST">
-    <div style="position: relative; width:500px;  margin: auto;">
+    <div style="position: relative; width:500px; display: block; margin: auto; right: 30px;">
         <input id="ethAddress" type="text" oninput="myFunction()" name="ethAddress" placeholder="Enter an Ethereum Address" required>
         <div id="validicon" style="display: none;">
         <i class="far fa-check-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
@@ -31,15 +61,20 @@
         <i class="far fa-times-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
         </div>
         <input type="submit" name="submit" value="submit">
-        </div>
+
+    </div>
 
     </form>
-<a>Ethereum Address:  </a>
-    <a class = "active" id="MnemonicOutput" >
+<div style="position: relative; width:1100px; display: block; margin: auto; left: 50px;">
+    <br>
+    <br>
+<a class = "active" id="MnemonicOutput" >
     </a>
 <button class="btn" id = "copyAddressButton" onclick="copyAddress()">
     <i class="far fa-copy copyicon" style="font-size:24px;"></i>
 </button>
+    </div>
+</div>
     <script>
         function myFunction() {
         var x = document.getElementById("ethAddress").value;
@@ -56,29 +91,29 @@
         }
         }
     </script>
+<div id="mnemForm" style="display: none;">
     <form id="EthOut" method="POST">
-        <div style="position: relative; width:900px;">
-        <input id="mnemonic" type="text" oninput="hit()" name="mnemonic" placeholder="Enter a Mnemonic" required>
+        <div style="position: relative; width:900px; display: block; margin: auto; right: 30px;">
+        <input id="mnemonic" type="text" oninput="isValidMnem()" name="mnemonic" placeholder="Enter a Mnemonic" required>
         <div id="validicon2" style="display: none;">
         <i class="far fa-check-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
         </div>
         <div id="wrongicon2" style="display: none;">
         <i class="far fa-times-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
         </div>
-            <input type="submit" name="submit" style="position: absolute; top: 0px; right: -55px; height:34px;" value="submit">
+            <input type="submit" name="submit" value="submit" style="height: 35.5px;">
         </div>
     </form>
-<a>Mnemonic:  </a>
+<div style="position: relative; width:1100px; display: block; margin: auto; left: 0px; text-align: center;">
+    <br>
+    <br>
     <a class = "active" id="AddressOutput">
     </a>
 <button class="btn" id = "copyMnemButton" onclick="copyMnemonic()" >
     <i class="far fa-copy copyicon" style="font-size:24px;"></i>
 </button>
-    <script>
-        function hit(){
-            isValidMnem();
-        }
-    </script>
+</div>
+</div>
 <script>
     var post_link_1 = "{% url 'Eth_to_Mnem' %}";
     var csrf_token_1 = '{{ csrf_token }}';
@@ -97,7 +132,6 @@
         navigator.clipboard.writeText(text);
     }
 </script>
-</div>
 </body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
