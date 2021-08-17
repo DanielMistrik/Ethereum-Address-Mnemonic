@@ -1,59 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>0xdWords - about</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}">
-    <link rel="shortcut icon" type="image/jpg" href="{% static 'fixedlogoSmall.jpg' %}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
-<body>
-    <div class="header">
-        <a href="{% url 'index' %}">
-            <img class = "logo" src="{% static 'fixedlogoSmall.jpg' %}" alt="My image">
-        </a>
-        <div class="header-right">
-            <a href="{% url 'index' %}">Main</a>
-            <a class="active" href="{% url 'about' %}">About</a>
+    <! The head that defines the shortcut icon,title and declares the necessary style sheets for icons and css>
+    <head>
+        <meta charset="UTF-8">
+        <title>0xdWords - about</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}">
+        <link rel="shortcut icon" type="image/jpg" href="{% static 'fixedlogoSmall.jpg' %}"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    </head>
+    <body>
+        <! Defines the header with the active menu page being the about page>
+        <div class="header">
+            <a href="{% url 'index' %}">
+                <img class = "logo" src="{% static 'fixedlogoSmall.jpg' %}" alt="My image">
+            </a>
+            <div class="header-right">
+                <a href="{% url 'index' %}">Main</a>
+                <a class="active" href="{% url 'about' %}">About</a>
+            </div>
         </div>
-    </div>
-<div class="text">
-    <h1 style="margin-bottom: 0.1em;">About</h1>
-    <div>Author: Daniel Mistrik</div>
-    <div style="text-align: left; padding-right: 50px; font-size: 20px;">
-
-<p>This project was inspired by the complexity of Ethereum addresses. The 42-character long hexadecimal is a combination
-    of seemingly random numbers and letters making it incredibly difficult to transfer through word of mouth.
-    Misspelling or forgetting a single character can mean disaster. While improvements,
-    such as <a href="https://ens.domains/">ENS</a> have improved the situation they are not
-    automatic to every address and often require payment to work. In short, the standard Ethereum address system is
-    a large and complicated one that is not intuitive and difficult to use and share in-person.</p>
-<p>Inspired by <a href="https://what3words.com/">what3words</a> which turned the similarly complicated system of geolocation
-    into three simple words this project converts every ethereum address into a unique mnemonic.
-    Every ethereum address is assigned a unique and permanent combination of 14 words. The
-    mnemonic is composed of non-similar words so a change of even one character in the address should make a noticeably
-    different mnemonic. One might ask why this mnemonic is 14 words
-    but what3words is just 3! The simple answer is that for security reasons the number of possible ethereum addresses is
-    far greater than the number of coordinates on Earth so this mnemonic needs to be larger. </p>
-<p>This project supports <a href="https://medium.com/exodus-movement/eip55-why-its-important-what-is-this-
-and-why-am-i-talking-about-it-now-ac9254f43bb6">EIP-55</a> and is case sensitive.</p>
-    </div>
-</div>
-
-<div class="text" style="text-align: center; vertical-align: bottom;">
-    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
-       style = "text-decoration: none;" target="blank">
-        <i class="fab fa-facebook-square" style="font-size: 48px; padding-right: 20px; color: #6891C3;"></i>
-    </a>
-    <a href="https://api.whatsapp.com/send?text={{ request.build_absolute_uri }}"
-       style = "text-decoration: none;" target="blank">
-        <i class="fab fa-whatsapp-square" style="font-size: 48px; padding-right: 20px; color: #6891C3;"></i>
-    </a>
-    <a href="https://twitter.com/intent/tweet?text={{ request.build_absolute_uri }}"
-       style = "text-decoration: none;" target="blank">
-        <i class="fab fa-twitter-square" style="font-size: 48px; padding-right: 20px; color: #6891C3;"></i>
-    </a>
-</div>
-</body>
+        <! Defines the about text>
+        <div class="text">
+            <h1 style="margin-bottom: 0.1em;">About</h1>
+            <div>Author: Daniel Mistrik</div>
+            <div style="text-align: left; padding-right: 50px; font-size: 20px;">
+                <p>This project was inspired by the complexity of Ethereum addresses. The 42-character long hexadecimal is a combination
+                    of seemingly random numbers and letters making it incredibly difficult to transfer through word of mouth.
+                    Misspelling or forgetting a single character can mean disaster. While improvements,
+                    such as <a href="https://ens.domains/">ENS</a> have improved the situation they are not
+                    automatic to every address and often require payment to work. In short, the standard Ethereum address system is
+                    a large and complicated one that is not intuitive and difficult to use and share in-person.</p>
+                <p>Inspired by <a href="https://what3words.com/">what3words</a> which turned the similarly complicated system of geolocation
+                    into three simple words this project converts every ethereum address into a unique mnemonic.
+                    Every ethereum address is assigned a unique and permanent combination of 14 words. The
+                    mnemonic is composed of non-similar words so a change of even one character in the address should make a noticeably
+                    different mnemonic. One might ask why this mnemonic is 14 words
+                    but what3words is just 3! The simple answer is that for security reasons the number of possible ethereum addresses is
+                    far greater than the number of coordinates on Earth so this mnemonic needs to be larger. </p>
+                <p>This project supports <a href="https://medium.com/exodus-movement/eip55-why-its-important-what-is-this-
+                and-why-am-i-talking-about-it-now-ac9254f43bb6">EIP-55</a> and is case sensitive.</p>
+            </div>
+        </div>
+        <! Defines the social media share icons>
+        <div class="text" style="text-align: center; vertical-align: bottom;">
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" style = "text-decoration: none;" target="blank">
+                <i class="fab fa-facebook-square" style="font-size: 48px; padding-right: 20px; color: #6891C3;"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send?text={{ request.build_absolute_uri }}" style = "text-decoration: none;" target="blank">
+                <i class="fab fa-whatsapp-square" style="font-size: 48px; padding-right: 20px; color: #6891C3;"></i>
+            </a>
+            <a href="https://twitter.com/intent/tweet?text={{ request.build_absolute_uri }}" style = "text-decoration: none;" target="blank">
+                <i class="fab fa-twitter-square" style="font-size: 48px; padding-right: 20px; color: #6891C3;"></i>
+            </a>
+        </div>
+    </body>
 </html>

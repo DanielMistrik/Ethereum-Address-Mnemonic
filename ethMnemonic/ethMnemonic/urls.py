@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('MnemonicGen/', include('MnemGen.urls')),
+    # Generates the path for the conversion app
+    path('', include('MnemGen.urls')),
     path('admin/', admin.site.urls),
 ]

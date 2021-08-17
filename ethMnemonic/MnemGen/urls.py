@@ -2,7 +2,7 @@ from django.conf.urls import url
 from django.urls import path
 
 from . import views
-
+# Defines the various urls patterns used by the view and the app.
 urlpatterns = [
     path('', views.index, name='index'),
     path('about/', views.about, name='about'),

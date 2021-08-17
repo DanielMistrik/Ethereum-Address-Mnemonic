@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+/* General body formating*/
 body {
   margin:0px;
   font-family: 'Roboto', sans-serif;
   background-color: #FAF8F6;
 }
-
+/* Style responsible for the general header */
 .header {
   overflow: hidden;
   background-color: #6891C3;
   padding: 5px;
   vertical-align: top;
 }
+/* Style responsible for the input text field (i.e. where the ethereum address or mnemonic is written) */
 input[type=text] {
   width: 100%;
   color: #6891C3;
@@ -24,7 +26,14 @@ input[type=text] {
   background-color: #FAF8F6;
   padding: 5px 5px 5px 5px;
 }
-
+/* Style for when the input text is clicked and currently in use. Here its to prevent it from changing in such a situation */
+input[type=text]:focus{
+  background-color: #FAF8F6;
+  border-color: #6891C3;
+  color: #6891C3;
+  outline: none;
+}
+/* Style for the submit button */
 input[type=submit]{
   position: absolute;
   top: 0px;
@@ -37,17 +46,11 @@ input[type=submit]{
   color: #FAF8F6;
  -webkit-text-fill-color: #FAF8F6;
 }
-
-.switch-button{
-  position: relative;
-  display: block;
-  margin: auto;
-}
-
+/* Style for when the submit button is clicked*/
 input[type=submit]:active{
   background-color: #9cb9de;
 }
-
+/* To prevent the input text field from going blue when there is autofill */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -55,20 +58,16 @@ input:-webkit-autofill:active
 {
  -webkit-box-shadow: 0 0 0 30px #FAF8F6 inset !important;
 }
+/* To make the input text blue in the input field*/
 input {
  color: #6891C3;
  -webkit-text-fill-color: #6891C3;
 }
-input[type=text]:focus{
-  background-color: #FAF8F6;
-  border-color: #6891C3;
-  color: #6891C3;
-  outline: none;
-}
-
+/* Make the placeholder in the input text field blue */
 ::placeholder{
   color: #6891C3;
 }
+/* Style for the menu buttons in the header */
 .header a {
   float: left;
   color: #FAF8F6;
@@ -80,44 +79,44 @@ input[type=text]:focus{
   line-height: 43px;
   font-weight: 400;
 }
+/* Style for the logo image in the header */
 .logo{
   width: 45px;
   height: auto;
   padding-left: 15px;
   vertical-align: top;
 }
-
+/* Positioning the menu buttons in the header to the right */
 .header-right {
   float: right;
 }
+/* Making the menu buttons a light blue to tell the user what menu they are in */
 .header a.active {
   color: #85b0ff;
 }
+/* Default styles for the copy buttons. Visibility is changed by JS scripts */
 .btn{
   visibility : hidden;
   border: none;
   background-color: #FAF8F6;
 }
+/* Padding for text in the about page*/
+.text{
+  padding-left: 20px;
+}
+/* Style for the copy buttons when clicked so the user knows they clicked them */
 .copyicon:active{
   color: #c4c2bf;
 }
-.text {
-  padding-left: 20px;
-}
+/* Style for when the screen becomes very thin. This is done so the menu changes in a controlled manner */
 @media screen and (max-width: 500px) {
   .header a {
     float: none;
     display: block;
     text-align: left;
   }
-
   .header-right {
     float: none;
     text-allign: left;
-  }
-
-  .header-logo {
-  padding-right: 200px;
-  padding-bottom: 20px;
   }
 }

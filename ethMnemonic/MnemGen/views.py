@@ -7,8 +7,12 @@ import sha3
 from .models import WordListEntry
 from django.shortcuts import render
 from django.template import loader
-
 def encrypt(hexs):
+    """
+    Converts the provided ethereum address into a mnemonic
+    :param hexs: The hexadecimal version of the ethereum address with 0x prefix
+    :return: Returns the mnemonic that was converted from the ethereum address from hexs
+    """
     hexs = hexs[2:]
     returnVar = []
     for i in range(0, len(hexs), 3):
@@ -19,6 +23,11 @@ def encrypt(hexs):
     return "-".join(returnVar)
 
 def decrypt(mnemonic):
+    """
+    Converts the provided mnemonic into a EIP-55 abiding ethereum address
+    :param mnemonic: The mnemonic, String, to be converted
+    :return: A String that represents the hexadecimal ethereum address with 0x prefix
+    """
     returnhex = ''
     workArray = mnemonic.split("-")
     for word in workArray:
@@ -26,6 +35,11 @@ def decrypt(mnemonic):
     return "0x"+makeEthAddress(returnhex)
 
 def makeEthAddress(address):
+    """
+    Converts an all lowercase address into an EIP-55 abiding one
+    :param address: The lowercase address to be modified without 0x prefix
+    :return: The EIP-55 abiding ethereum address without 0x prefix
+    """
     kck = sha3.keccak_256()
     kck.update(address.encode('ascii'))
     hash = kck.hexdigest()
@@ -39,33 +53,24 @@ def makeEthAddress(address):
     return returnAddress
 
 def index(request):
-    if request.method == "POST":
-        if 'ethAddress' in request.POST:
-            address = request.POST['ethAddress']
-            try:
-                returnVar = encrypt(address)
-            except ValueError:
-                return render(request, 'MnemGen/index.html',
-                              {'eth_Address': 'Address was invalid', })
-            return render(request, 'MnemGen/index.html',
-                          {'eth_Address': returnVar, })
-        else:
-            mnemonic = request.POST['mnemonic']
-            try:
-                returnVar = decrypt(mnemonic)
-            except ObjectDoesNotExist:
-                return render(request, 'MnemGen/index.html',
-                              {'eth_mnemonic': 'Address was invalid', })
-            return render(request, 'MnemGen/index.html',
-                          {'eth_mnemonic': returnVar, })
-    else:
-        return render(request,'MnemGen/index.html',{})
+    """
+    Renders the main html page
+    """
+    return render(request,'MnemGen/index.html',{})
 
 
 def about(request):
+    """
+    Renders the about page
+    """
     return render(request,'MnemGen/about.html')
 
 def EthtoMnem(request):
+    """
+    Processes an ajax request and converts the provided ethereum address into a mnemonic
+    :param request: Ajax request containing the ethereum address to be converted
+    :return: Json response containing the converted mnemonic
+    """
     if request.is_ajax():
         addrss = request.POST.get('addrss', None)
         try:
@@ -79,8 +84,13 @@ def EthtoMnem(request):
             return JsonResponse(response) # return response as JSON
 
 def MnemtoEth(request):
+    """
+    Processes an ajax request and converts the provided mnemonic into a EIP-55 abiding ethereum address
+    :param request: Ajax request with the mnemonic to be converted
+    :return: Json response that contains the EIP-55 abiding converted ethereum address
+    """
     if request.is_ajax():
-        mnemonic = request.POST.get('mnem', None) # getting data from first_name input
+        mnemonic = request.POST.get('mnem', None)
         try:
             returnVar = decrypt(mnemonic)
         except Exception:
@@ -92,6 +102,11 @@ def MnemtoEth(request):
             return JsonResponse(response)
 
 def MnemChecker(request):
+    """
+    Processes an ajax request and determines if the provided mnemonic is valid
+    :param request: Ajax request with the corresponding mnemonic
+    :return: Returns a JSON response with the verdict of whether the mnemonic is valid, outputs "Valid", or invalid, outputs "Invalid"
+    """
     if request.is_ajax():
         mnemonic = request.POST.get('mnem',None)
         isValid = False

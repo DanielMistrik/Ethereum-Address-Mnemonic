@@ -1,139 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>0xdWords</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}">
-    <link rel="shortcut icon" type="image/jpg" href="{% static 'fixedlogoSmall.jpg' %}"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
-<body>
-<div class="header">
-    <a href="{% url 'index' %}">
-        <img class = "logo" src="{% static 'fixedlogoSmall.jpg' %}" alt="My image">
-    </a>
-  <div class="header-right">
-    <a class = "active" href="{% url 'index' %}">Main</a>
-    <a href="{% url 'about' %}">About</a>
-  </div>
-</div>
-<div style="position: relative;display: block;margin: auto; text-align: center; padding: 20px;">
-<a href="{% url 'about' %}">
-<img src="{% static 'bigLogo.jpg' %}" style = "width:100px; height: auto;">
-    </a>
-</div>
-    <br>
-<a id = "switchArea" style="display: block; text-align: center;">
-    <i id = "inAddr" class="fas fa-circle" style="font-size:14px; color: #6891C3;"></i>
-    <i id = "inMnem" class="far fa-circle" style="font-size:14px; color: #6891C3;"></i>
-</a>
-<br>
-<br>
-<script>
-    document.getElementById("switchArea").onclick =  function(){
-        if (document.getElementById('inAddr').classList.contains('fas')){
-            document.getElementById('inAddr').classList.remove('fas');
-            document.getElementById('inAddr').classList.add('far');
-            document.getElementById('inMnem').classList.remove('far');
-            document.getElementById('inMnem').classList.add('fas');
-            document.getElementById('addressForm').style.display = 'none';
-            document.getElementById('mnemForm').style.display='block';
-        }
-        else{
-            document.getElementById('inAddr').classList.remove('far');
-            document.getElementById('inAddr').classList.add('fas');
-            document.getElementById('inMnem').classList.remove('fas');
-            document.getElementById('inMnem').classList.add('far');
-            document.getElementById('addressForm').style.display = 'block';
-            document.getElementById('mnemForm').style.display='none';
-        }
-    }
-</script>
-<div id="addressForm" style="display: block;">
-<form id="EthIn" method="POST">
-    <div style="position: relative; width:500px; display: block; margin: auto; right: 30px;">
-        <input id="ethAddress" type="text" oninput="myFunction()" name="ethAddress" placeholder="Enter an Ethereum Address" required>
-        <div id="validicon" style="display: none;">
-        <i class="far fa-check-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
+    <! Head that defines the shortcut icon & title and the necessary css and icon style sheets>
+    <head>
+        <meta charset="UTF-8">
+        <title>0xdWords</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'header.css' %}">
+        <link rel="shortcut icon" type="image/jpg" href="{% static 'fixedlogoSmall.jpg' %}"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    </head>
+    <body>
+        <! Defines the header with the main menu button being highlighted accordingly>
+        <div class="header">
+            <a href="{% url 'index' %}">
+                <img class = "logo" src="{% static 'fixedlogoSmall.jpg' %}" alt="My image">
+            </a>
+        <div class="header-right">
+            <a class = "active" href="{% url 'index' %}">Main</a>
+            <a href="{% url 'about' %}">About</a>
         </div>
-        <div id="wrongicon" style="display: none;">
-        <i class="far fa-times-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
         </div>
-        <input type="submit" name="submit" value="submit">
-
-    </div>
-
-    </form>
-<div style="position: relative; width:1100px; display: block; margin: auto; left: 15px; text-align: center;">
-    <br>
-    <br>
-<a class = "active" id="MnemonicOutput" >
-    </a>
-<button class="btn" id = "copyAddressButton" onclick="copyAddress()">
-    <i class="far fa-copy copyicon" style="font-size:24px;"></i>
-</button>
-    </div>
-</div>
-    <script>
-        function myFunction() {
-        var x = document.getElementById("ethAddress").value;
-        document.getElementById("ethAddress").style.backgroundColor= "#FAF8F6";
-        if (isValid(x)){
-        //document.getElementById("isValid").innerHTML = "Valid";
-        document.getElementById("validicon").style.display = "block";
-        document.getElementById("wrongicon").style.display = "none";
-        }
-        else{
-        //document.getElementById("isValid").innerHTML = "Invalid";
-        document.getElementById("validicon").style.display = "none";
-        document.getElementById("wrongicon").style.display = "block";
-        }
-        }
-    </script>
-<div id="mnemForm" style="display: none;">
-    <form id="EthOut" method="POST">
-        <div style="position: relative; width:900px; display: block; margin: auto; right: 30px;">
-        <input id="mnemonic" type="text" oninput="isValidMnem()" name="mnemonic" placeholder="Enter a Mnemonic" required>
-        <div id="validicon2" style="display: none;">
-        <i class="far fa-check-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
+        <! Defines the big logo in the middle of the screen>
+        <div style="position: relative;display: block;margin: auto; text-align: center; padding: 20px;">
+            <a href="{% url 'about' %}">
+                <img src="{% static 'bigLogo.jpg' %}" style = "width:100px; height: auto;">
+            </a>
         </div>
-        <div id="wrongicon2" style="display: none;">
-        <i class="far fa-times-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
+        <! Defines the switch between address and mnemonic conversion>
+        <br>
+        <a id = "switchArea" style="display: block; text-align: center;">
+            <i id = "inAddr" class="fas fa-circle" style="font-size:14px; color: #6891C3;"></i>
+            <i id = "inMnem" class="far fa-circle" style="font-size:14px; color: #6891C3;"></i>
+        </a>
+        <br>
+        <br>
+        <script>
+            // Function gets called on the click of the switch button
+            document.getElementById("switchArea").onclick =  function(){
+                // If the current tab was address conversion switch to mnemonic conversion
+                if (document.getElementById('inAddr').classList.contains('fas')){
+                    document.getElementById('inAddr').classList.remove('fas');
+                    document.getElementById('inAddr').classList.add('far');
+                    document.getElementById('inMnem').classList.remove('far');
+                    document.getElementById('inMnem').classList.add('fas');
+                    document.getElementById('addressForm').style.display = 'none';
+                    document.getElementById('mnemForm').style.display='block';
+                }
+                // If the current tab was mnemonic conversion switch to address conversion
+                else{
+                    document.getElementById('inAddr').classList.remove('far');
+                    document.getElementById('inAddr').classList.add('fas');
+                    document.getElementById('inMnem').classList.remove('fas');
+                    document.getElementById('inMnem').classList.add('far');
+                    document.getElementById('addressForm').style.display = 'block';
+                    document.getElementById('mnemForm').style.display='none';
+                }
+            }
+        </script>
+        <! Defines the greater address conversion area along with space for a possible converted mnemonic>
+        <div id="addressForm" style="display: block;">
+            <! Defines the address conversion form>
+            <form id="EthIn" method="POST">
+                <div style="position: relative; width:500px; display: block; margin: auto; right: 30px;">
+                    <input id="ethAddress" type="text" oninput="myFunction()" name="ethAddress" placeholder="Enter an Ethereum Address" required>
+                        <div id="validicon" style="display: none;">
+                            <i class="far fa-check-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
+                        </div>
+                        <div id="wrongicon" style="display: none;">
+                            <i class="far fa-times-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
+                        </div>
+                        <input type="submit" name="submit" value="submit">
+                </div>
+            </form>
+            <! Space for the converted mnemonic along with the copy button>
+            <div style="position: relative; width:100%; display: block; margin: auto; left: 15px; text-align: center;">
+                <br>
+                <br>
+                <a class = "active" id="MnemonicOutput" ></a>
+                <button class="btn" id = "copyAddressButton" onclick="copyAddress()">
+                    <i class="far fa-copy copyicon" style="font-size:24px;"></i>
+                </button>
+            </div>
         </div>
-            <input type="submit" name="submit" value="submit" style="height: 35.5px;">
+        <script>
+            // Function that gets called when the input field for entering the ethereum address is activated
+            function myFunction() {
+                // Get the current ethereum address that was inputted and set the background colour to the standard
+                var x = document.getElementById("ethAddress").value;
+                document.getElementById("ethAddress").style.backgroundColor= "#FAF8F6";
+                // If the current ethereum address is valid make the check icon visible
+                if (isValid(x)){
+                    //document.getElementById("isValid").innerHTML = "Valid";
+                    document.getElementById("validicon").style.display = "block";
+                    document.getElementById("wrongicon").style.display = "none";
+                }
+                // If the current ethereum address is invalid make the cross icon visible
+                else{
+                //document.getElementById("isValid").innerHTML = "Invalid";
+                document.getElementById("validicon").style.display = "none";
+                document.getElementById("wrongicon").style.display = "block";
+                }
+            }
+        </script>
+        <! Defines the greater mnemonic conversion area and so includes space for the converted ethereum address >
+        <div id="mnemForm" style="display: none;">
+            <! Defines the mnemonic conversion form>
+            <form id="EthOut" method="POST">
+                <div style="position: relative; width:1000px; display: block; margin: auto; right: 30px;">
+                    <input id="mnemonic" type="text" oninput="isValidMnem()" name="mnemonic" placeholder="Enter a Mnemonic" required>
+                    <div id="validicon2" style="display: none;">
+                        <i class="far fa-check-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
+                    </div>
+                    <div id="wrongicon2" style="display: none;">
+                        <i class="far fa-times-circle" style="font-size:24px; position: absolute; top: 5px; right: 7px; color: #6891C3;"></i>
+                    </div>
+                    <input type="submit" name="submit" value="submit" style="height: 35.5px;">
+                </div>
+            </form>
+            <! Defines the area for the converted address and the accompanying copy button>
+            <div style="position: relative; width:100%; display: block; margin: auto; left: 0px; text-align: center;">
+                <br>
+                <br>
+                <a class = "active" id="AddressOutput"></a>
+                <button class="btn" id = "copyMnemButton" onclick="copyMnemonic()" >
+                    <i class="far fa-copy copyicon" style="font-size:24px;"></i>
+                </button>
+            </div>
         </div>
-    </form>
-<div style="position: relative; width:1100px; display: block; margin: auto; left: 0px; text-align: center;">
-    <br>
-    <br>
-    <a class = "active" id="AddressOutput">
-    </a>
-<button class="btn" id = "copyMnemButton" onclick="copyMnemonic()" >
-    <i class="far fa-copy copyicon" style="font-size:24px;"></i>
-</button>
-</div>
-</div>
-<script>
-    var post_link_1 = "{% url 'Eth_to_Mnem' %}";
-    var csrf_token_1 = '{{ csrf_token }}';
-    var post_link_2 = "{% url 'Mnem_to_Eth' %}";
-    var csrf_token_2 = '{{ csrf_token }}';
-    var post_link_3 = "{% url 'MnemValid' %}";
-    var csrf_token_3 = '{{ csrf_token }}';
-
-    function copyAddress(){
-    let text = document.getElementById('MnemonicOutput').textContent;
-    navigator.clipboard.writeText(text);
-}
-
-    function copyMnemonic(){
-        let text = document.getElementById('AddressOutput').textContent;
-        navigator.clipboard.writeText(text);
-    }
-</script>
-</body>
-</html>
+        <script>
+            // The following utilizes Django template to get the csrf token and post links for the various ajax calls
+            // in the static js files
+            var post_link_1 = "{% url 'Eth_to_Mnem' %}";
+            var csrf_token_1 = '{{ csrf_token }}';
+            var post_link_2 = "{% url 'Mnem_to_Eth' %}";
+            var csrf_token_2 = '{{ csrf_token }}';
+            var post_link_3 = "{% url 'MnemValid' %}";
+            var csrf_token_3 = '{{ csrf_token }}';
+            // Function that gives the copy address button its copy ability
+            function copyAddress(){
+            let text = document.getElementById('MnemonicOutput').textContent;
+            navigator.clipboard.writeText(text);
+            }
+            // Function that gives the copy mnemonic abutton its copy ability
+            function copyMnemonic(){
+                let text = document.getElementById('AddressOutput').textContent;
+                navigator.clipboard.writeText(text);
+            }
+        </script>
+    </body>
+    </html>
+<! Declares the various scripts used in this page>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{% static 'bundle.js' %}"></script>
 <script src="{% static 'isValidEthAddress.js' %}"></script>

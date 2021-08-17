@@ -1,15 +1,18 @@
-# This is a sample Python script.
+# This script was what processed the raw oxford 5000 word dictionary into a processed word list of 4096 words
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-import json
 import os
+import json
 import random
 import time
 
 wordList = []
 indexDict = {}
 def loadWordList():
+    """
+    Function that loads the processed word list into the script variable wordList
+    Source of the processed word list is processedWordList.txt
+    :return: None
+    """
     if not os.path.exists('processedWordList.txt'):
         return
     with open('processedWordList.txt','r') as txtfile:
@@ -21,6 +24,11 @@ def loadWordList():
             i+=1
 
 def convertWordListToJSON():
+    """
+    Converts the word list in the wordList array into a json that can be loaded into Django models and saves it into
+    the file processedWordList.json
+    :return: None
+    """
     jsonLists = []
     for i,word in enumerate(wordList):
         tempJson = {"model": "MnemGen.wordlistentry","pk":i}
@@ -30,6 +38,11 @@ def convertWordListToJSON():
         json.dump(jsonLists,jsonfile)
 
 def filterWordList():
+    """
+    Filters the raw word list into a processed word list and saves the contents into processedWordList.txt
+    Source of raw word list is RawWordList.txt
+    :return: None
+    """
     if os.path.exists('processedWordList.txt'):
         return
     rootPath = os.getcwd()+'/RawWordList.txt'
@@ -58,6 +71,10 @@ def filterWordList():
             txtfile.write(word.lower()+'\n')
 
 def printOutWordList():
+    """
+    Function that slowly prints out the entire processed word list, from processedWordList.txt, in terminal
+    :return: None
+    """
     if not os.path.exists('processedWordList.txt'):
         return
     with open('processedWordList.txt','r') as txtfile:
@@ -69,4 +86,3 @@ def printOutWordList():
 if __name__ == '__main__':
     pass
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
