@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-<div class="header">
-    <a href="{% url 'index' %}">
-        <img class = "logo" src="{% static 'fixedlogoSmall.jpg' %}" alt="My image">
-    </a>
-  <div class="header-right">
-<a href="{% url 'index' %}">Main</a>
-<a class="active" href="{% url 'about' %}">About</a>
-  </div>
-</div>
+    <div class="header">
+        <a href="{% url 'index' %}">
+            <img class = "logo" src="{% static 'fixedlogoSmall.jpg' %}" alt="My image">
+        </a>
+        <div class="header-right">
+            <a href="{% url 'index' %}">Main</a>
+            <a class="active" href="{% url 'about' %}">About</a>
+        </div>
+    </div>
 <div class="text">
     <h1 style="margin-bottom: 0.1em;">About</h1>
     <div>Author: Daniel Mistrik</div>
