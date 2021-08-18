@@ -20,6 +20,7 @@ $('#EthIn').on('submit', function(e){
                 else{
                     // Informs the user the inputted address was invalid
                     document.getElementById("MnemonicOutput").textContent = 'Invalid Address';
+                    document.getElementById("copyAddressButton").style.visibility = 'hidden';
                 }
             document.getElementById("MnemonicOutput").style = "font-size: 20px;";
         },
