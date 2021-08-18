@@ -3,8 +3,8 @@
 </p>
 
 # 0xD words (Ethereum-Address-Mnemonic)
-Turn any Ethereum address into a recognizable and usable mnemonic.
-! Chrome Optimized - no guarantee about styles in other browsers.
+Turn any Ethereum address into a recognizable and usable mnemonic.<br>
+<b>Chrome Optimized</b> - no guarantee about styles in other browsers.<br>
 0xd_words - Same repository but some changes to deployment paramaters and the one used by heroku.
 
 ## Preface
