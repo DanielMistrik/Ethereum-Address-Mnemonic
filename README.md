@@ -4,6 +4,9 @@
 
 # 0xD words (Ethereum-Address-Mnemonic)
 Turn any Ethereum address into a recognizable and usable mnemonic.
+! Chrome Optimized - no guarantee about styles in other browsers.
+0xd_words - Same repository but some changes to deployment paramaters and the one used by heroku.
+
 ## Preface
 <p> The inspiration for 0xD words came from the inherent complexity of Ethereum addresses. To ensure availability and prevent two users having the same address the number of possible addresses is incredibly large (> 10<sup>48</sup>). To identify each address in this enormous set Ethereum utilizes the address in hexadecimal form and while this does uniquely identify it, hexadecimal is difficult to remember exactly and prone to small errors, especially when its 40 characters like in Ethereum. Improvements such as EIP-55 checksumm and ENS have improved usability but ENS is a paid service and EIP-55, being a soft fork, isn't implemented universally. </p>
 <p> What was needed is a more human-friendly way to define Ethereum addresses. The project what3words were faced with a similair problem for geolocation, coordinates are unwieldy and hard to remember, and solved it with a word mnemonic and this project will as well. Words are natural, easy to remember and one can detect different words better than different characters </p>
