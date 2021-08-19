@@ -4,6 +4,9 @@
 
 # 0xD words (Ethereum-Address-Mnemonic)
 Turn any Ethereum address into a recognizable and usable mnemonic.<br>
+<br>
+Available at: [https://oxdwords.herokuapp.com/](https://oxdwords.herokuapp.com/) (More permanent domain in progress)
+<br><br>
 <b>Chrome Optimized</b> - no guarantee about styles in other browsers.<br>
 0xd_words - Same repository but some changes to deployment paramaters and the one used by heroku.
 
